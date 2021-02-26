@@ -9,19 +9,29 @@ export class Node {
     this.value = value;
   }
 
-  addNode(node: Node) {
+  addNodeBST(node: Node) {
     if (node.value < this.value) {
       if (!this.left) {
         this.left = node;
       } else {
-        this.left.addNode(node);
+        this.left.addNodeBST(node);
       }
     } else if (node.value > this.value) {
       if (!this.right) {
         this.right = node;
       } else {
-        this.right.addNode(node);
+        this.right.addNodeBST(node);
       }
     }
+  }
+
+  traverseInOrder(node: Node | undefined, arr: number[] | string[]) {
+    if (!node) {
+      return;
+    }
+    this.traverseInOrder(node.left, arr);
+    //@ts-ignore
+    arr.push(node.value);
+    this.traverseInOrder(node.right, arr);
   }
 }
