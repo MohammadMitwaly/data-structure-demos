@@ -8,6 +8,8 @@ interface SketchBSTProps {}
 
 export const SketchBST: React.FC<SketchBSTProps> = (props: SketchBSTProps) => {
   const root = new Node(10);
+  root.xCo = window.innerWidth / 2;
+  root.yCo = 100;
   let rootBST = new BST(root);
   rootBST.addNode(new Node(15));
   rootBST.addNode(new Node(11));
@@ -23,6 +25,8 @@ export const SketchBST: React.FC<SketchBSTProps> = (props: SketchBSTProps) => {
 
   const draw = (p5: p5Types) => {
     p5.background("#172121");
+    rootBST.draw(p5, rootBST.root);
+    p5.noLoop();
   };
 
   return <Sketch setup={setup} draw={draw} />;
