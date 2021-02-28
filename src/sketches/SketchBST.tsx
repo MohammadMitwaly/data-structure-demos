@@ -7,16 +7,20 @@ import BST from "../models/BST";
 interface SketchBSTProps {}
 
 export const SketchBST: React.FC<SketchBSTProps> = (props: SketchBSTProps) => {
-  const root = new Node(10);
+  const root = new Node(100);
   root.xCo = window.innerWidth / 2;
   root.yCo = 100;
   let rootBST = new BST(root);
   rootBST.addNode(new Node(15));
   rootBST.addNode(new Node(11));
   rootBST.addNode(new Node(3));
-  rootBST.addNode(new Node(6));
+  rootBST.addNode(new Node(60));
+  rootBST.addNode(new Node(30));
+  rootBST.addNode(new Node(31));
+  rootBST.addNode(new Node(110));
   rootBST.traverseInOrder();
-  console.log(rootBST.valuesInOrder);
+  console.log(rootBST);
+  rootBST.printParent(rootBST.root);
 
   //See annotations in JS for more information
   const setup = (p5: p5Types, canvasParentRef: Element) => {

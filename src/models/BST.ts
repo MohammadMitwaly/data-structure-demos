@@ -17,9 +17,25 @@ export default class BST {
     if (!node) {
       return;
     }
-    p5.fill(p5.random(255), p5.random(255), p5.random(255));
-    let size = 10;
-    p5.ellipse(node.xCo, node.yCo, size, size);
+    p5.fill(255);
+    p5.noStroke();
+    let size = 30;
+    p5.textAlign(p5.CENTER);
+    let x = node.xCo + node.leftSpacing + node.rightSpacing;
+    let y = node.yCo + node.leftSpacing + node.rightSpacing;
+    p5.text(node.value, x, y);
+    p5.stroke(255);
+    p5.noFill();
+    p5.ellipse(x, y, size, size);
+    //@ts-ignore
+    p5.line(
+      //@ts-ignore
+      node.parent?.xCo + node.parent?.leftSpacing + node.parent?.rightSpacing,
+      //@ts-ignore
+      node.parent?.yCo + node.parent?.rightSpacing + node.parent?.leftSpacing,
+      x,
+      y
+    );
     this.draw(p5, node.left);
     this.draw(p5, node.right);
   }
@@ -30,15 +46,12 @@ export default class BST {
   }
 
   addNode(node: Node) {
-    var shiftedNode = this.root.addValue(node.value);
-    this.setCoordinates(shiftedNode);
+    this.root.addNodeBST(node);
   }
 
-  setCoordinates(node: Node) {
-    if (node === this.root) {
-      node.setCoordinates(this.rootX, this.rootY);
-    } else if (node) {
-      node.setCoordinates();
-    }
+  printParent(node: Node) {
+    if (node.parent) console.log(`${node.parent?.value} --> ${node.value}`);
+    if (node.left) this.printParent(node.left);
+    if (node.right) this.printParent(node.right);
   }
 }
