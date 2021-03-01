@@ -1,19 +1,19 @@
-import { Node } from "./Node";
+import { BinNode } from "./BinNode";
 import p5Types from "p5";
 
 export default class BST {
-  root: Node;
+  root: BinNode;
   valuesInOrder: number[] | string[] = [];
   rootX: number;
   rootY: number;
 
-  constructor(node: Node) {
+  constructor(node: BinNode) {
     this.root = node;
     this.rootX = node.xCo;
     this.rootY = node.yCo;
   }
 
-  draw(p5: p5Types, node: Node | undefined) {
+  draw(p5: p5Types, node: BinNode | undefined) {
     if (!node) {
       return;
     }
@@ -45,11 +45,11 @@ export default class BST {
     this.root.traverseInOrder(this.root, this.valuesInOrder);
   }
 
-  addNode(node: Node) {
+  addNode(node: BinNode) {
     this.root.addNodeBST(node);
   }
 
-  printParent(node: Node) {
+  printParent(node: BinNode) {
     if (node.parent) console.log(`${node.parent?.value} --> ${node.value}`);
     if (node.left) this.printParent(node.left);
     if (node.right) this.printParent(node.right);
