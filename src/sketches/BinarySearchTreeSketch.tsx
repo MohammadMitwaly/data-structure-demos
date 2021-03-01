@@ -4,9 +4,11 @@ import Sketch from "react-p5";
 import { BinNode } from "../models/BinNode";
 import BST from "../models/BST";
 
-interface SketchBSTProps {}
+interface BinarySearchTreeSketchProps {}
 
-export const SketchBST: React.FC<SketchBSTProps> = (props: SketchBSTProps) => {
+export const SketchBST: React.FC<BinarySearchTreeSketchProps> = (
+  props: BinarySearchTreeSketchProps
+) => {
   const root = new BinNode(100);
   root.xCo = window.innerWidth / 2;
   root.yCo = 100;

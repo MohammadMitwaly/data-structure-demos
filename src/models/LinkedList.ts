@@ -2,6 +2,10 @@ import Node from "./Node";
 
 export class LinkedList {
   head: Node<number | string> | undefined;
+  // Adding length to optimize "search" by index
+  // The logic breaks if we are trying to add a chain of nodes
+  // TODO: Fix logic
+  lengthOfList: number = 0;
 
   insert(node: Node<number | string>) {
     if (!this.head) {
@@ -13,6 +17,7 @@ export class LinkedList {
       }
       last.next = node;
     }
+    this.lengthOfList++;
   }
 
   outputList() {
@@ -38,7 +43,7 @@ export class LinkedList {
     return foundValue;
   }
 
-  removeNode(value: number | string) {
+  removeNodeByValue(value: number | string) {
     // Store head and set-up previous
     let curr = this.head;
     let prev: Node<number | string> | undefined;
@@ -65,5 +70,35 @@ export class LinkedList {
       }
     }
     console.log("Node does not exist");
+  }
+
+  removeNodeByPosition(position: number) {
+    if (position > this.lengthOfList) {
+      console.log("Node position does not exist");
+      return;
+    }
+
+    let curr = this.head;
+    let prev: Node<number | string> | undefined;
+
+    if (position === 0 && curr) {
+      this.head = curr.next;
+      console.log("Node was head");
+      return;
+    }
+
+    let currIndex = 0;
+    while (curr) {
+      if (currIndex === position) {
+        if (prev) {
+          prev.next = curr.next;
+          console.log("Found it, value was somewhere in the middle");
+          return;
+        }
+      }
+      currIndex++;
+      prev = curr;
+      curr = curr.next;
+    }
   }
 }

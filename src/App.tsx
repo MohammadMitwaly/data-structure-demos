@@ -1,11 +1,12 @@
 import React from "react";
 import "./App.css";
-import { SketchBST } from "./sketches/SketchBST";
+import { LinkedListSketch } from "./sketches/LinkedListSketch";
 
 const App = () => {
   return (
     <>
-      <SketchBST />
+      {/* <SketchBST /> */}
+      <LinkedListSketch />
     </>
   );
 };
