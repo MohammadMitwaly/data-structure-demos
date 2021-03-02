@@ -3,7 +3,7 @@ import Node from "../models/Node";
 import { LinkedList } from "../models/LinkedList";
 
 export const createFillLinkedListNumbers = (
-  amount: Number,
+  amount: number,
   minNumber: number,
   maxNumber: number
 ) => {
