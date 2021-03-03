@@ -8,7 +8,8 @@ interface LinkedListSketchProps {}
 export const LinkedListSketch: React.FC<LinkedListSketchProps> = (
   props: LinkedListSketchProps
 ) => {
-  const linkedListOfNumbers = createFillLinkedListNumbers(6, 42, 720);
+  const linkedListOfNumbers = createFillLinkedListNumbers(18, 42, 720);
+
   const setup = (p5: p5Types, canvasParentRef: Element) => {
     p5.createCanvas(p5.windowWidth, p5.windowHeight).parent(canvasParentRef);
     console.log(linkedListOfNumbers);
@@ -20,5 +21,9 @@ export const LinkedListSketch: React.FC<LinkedListSketchProps> = (
     p5.noLoop();
   };
 
-  return <Sketch setup={setup} draw={draw} />;
+  const resize = (p5: p5Types) => {
+    p5.resizeCanvas(p5.windowWidth, p5.windowHeight);
+  };
+
+  return <Sketch setup={setup} draw={draw} windowResized={resize} />;
 };

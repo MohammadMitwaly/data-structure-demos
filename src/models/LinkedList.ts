@@ -107,29 +107,63 @@ export class LinkedList {
   drawList(p5: p5Types) {
     let xCord = 75;
     let yCord = 75;
-    let xOffset = xCord / 10;
-    let yOffset = yCord / 10;
+    let xOffset = 16;
+    let yOffset = 5;
+    let newRow = false;
     let curr = this.head;
-    this.drawValueText(xCord, yCord, xOffset, yOffset, curr?.value, p5);
-    this.drawNodeShape(xCord, yCord, p5);
+    this.drawStart(50, 40, p5);
+    while (curr) {
+      this.drawValueText(xCord, yCord, xOffset, yOffset, curr?.value, p5);
+      this.drawNodeShape(xCord, yCord, p5);
 
-    p5.rectMode(p5.CENTER);
-    p5.stroke(255);
+      curr = curr.next;
+      console.log(xCord, yCord, p5.width);
+      if (!newRow) {
+        let currX = xCord;
+        xCord = xCord + p5.width / 9 + 30;
+        let nextY =
+          xCord > p5.width - 200 || xCord < 50
+            ? yCord + p5.height / 14 + 45
+            : yCord;
+        // Curr has been reassigned to next, we don't want to draw a connection unless next exists
+        if (curr) {
+          this.drawConnection(
+            currX,
+            yCord,
+            xCord < 50 ? 75 : xCord,
+            nextY + 8,
+            p5
+          );
+        }
+      } else {
+        let currX = xCord;
+        xCord = xCord - p5.width / 9 - 30;
+        let nextY =
+          xCord > p5.width - 200 || xCord < 50
+            ? yCord + p5.height / 14 + 45
+            : yCord;
+        // Curr has been reassigned to next, we don't want to draw a connection unless next exists
+        if (curr) {
+          this.drawConnection(currX, yCord, xCord < 50 ? 75 : xCord, nextY, p5);
+        }
+      }
+
+      if (xCord > p5.width - 200) {
+        newRow = true;
+        yCord = yCord + p5.height / 14 + 45;
+      } else if (xCord < 50) {
+        newRow = false;
+        xCord = 75;
+        yCord = yCord = yCord + p5.height / 14 + 45;
+      }
+    }
+  }
+
+  drawStart(xCord: number, yCord: number, p5: p5Types) {
     p5.fill(255);
-    p5.rect(xCord + 50, yCord + 10, 5, 5);
-    p5.line(xCord + 50, yCord + 10, xCord + 100, yCord + 10);
-    p5.push();
-    p5.translate(xCord + 100, yCord + 10);
-    p5.rotate(0.2);
-    p5.triangle(
-      xCord + 100,
-      yCord + 10,
-      xCord + 95,
-      yCord + 20,
-      xCord + 105,
-      yCord + 20
-    );
-    p5.pop();
+    p5.noStroke();
+    p5.textAlign(p5.RIGHT);
+    p5.text(`Start ⤵️`, xCord, yCord);
   }
 
   drawValueText(
@@ -150,27 +184,20 @@ export class LinkedList {
     p5.rectMode(p5.CENTER);
     p5.stroke(255);
     p5.noFill();
-    p5.rect(xCord, yCord, p5.width / 10, p5.height / 15);
+    p5.rect(xCord, yCord, p5.width / 9, p5.height / 14);
   }
 
-  drawArrow(
-    base: p5Types.Vector,
-    vec: p5Types.Vector,
-    myColor: string,
+  drawConnection(
+    xCord: number,
+    yCord: number,
+    xCordOfNext: number,
+    yCordOfNext: number,
     p5: p5Types
   ) {
-    p5.push();
-
-    p5.stroke(myColor);
-    p5.strokeWeight(3);
-    p5.fill(myColor);
-    p5.translate(base.x, base.y);
-    p5.line(0, 0, vec.x, vec.y);
-
-    p5.rotate(vec.heading());
-    let arrowSize = 7;
-    p5.translate(vec.mag() - arrowSize, 0);
-    p5.triangle(0, arrowSize / 2, 0, -arrowSize / 2, arrowSize, 0);
-    p5.pop();
+    p5.rectMode(p5.CENTER);
+    p5.stroke("#047de0");
+    p5.fill(255);
+    p5.rect(xCord + 45, yCord + 10, 5, 5);
+    p5.line(xCord + 45, yCord + 10, xCordOfNext, yCordOfNext);
   }
 }
