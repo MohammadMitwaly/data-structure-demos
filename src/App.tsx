@@ -6,7 +6,7 @@ import { StackSketch } from './sketches/StackSketch';
 import { CircularQueueSketch } from './sketches/CircularQueueSketch';
 
 const App = () => {
-    const [currentSketch, setCurrentSketch] = useState(0);
+    const [currentSketch, setCurrentSketch] = useState(3);
     const handleSwitch = (n: number) => {
         switch (n) {
             case 0:

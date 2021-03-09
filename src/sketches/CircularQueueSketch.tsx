@@ -28,11 +28,13 @@ export const CircularQueueSketch: React.FC<CircularQueueSketchProps> = (
 
     const draw = (p5: p5Types) => {
         p5.background('#172121');
+        myQueue.drawQueue(p5);
         p5.noLoop();
     };
 
     const resize = (p5: p5Types) => {
         p5.resizeCanvas(p5.windowWidth, p5.windowHeight);
+        setMyQueue(fillNumberQueue(0, 100));
     };
 
     return <Sketch setup={setup} draw={draw} windowResized={resize} />;

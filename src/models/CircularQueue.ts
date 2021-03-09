@@ -1,5 +1,7 @@
+import p5Types from 'p5';
+
 export default class CircularQueue<T> {
-    maxSize: number = 8;
+    maxSize: number = Math.floor((window.innerWidth - 75) / 80);
     frontIndex: number;
     rearIndex: number;
     values: T[];
@@ -78,5 +80,70 @@ export default class CircularQueue<T> {
         // Last item
         console.log(`${this.values[index]}`);
         console.log(`Rear ➡️ ${this.rearIndex}`);
+    }
+
+    drawQueue(p5: p5Types) {
+        let xCord = 50;
+        let yCord = p5.height / 2;
+        let queueWidth = p5.width - 50;
+        let queueHeight = 50;
+        this.drawShape(xCord, yCord, 70, p5);
+        this.drawQueueItems(xCord, yCord, p5);
+        this.drawFront(xCord, queueHeight, p5);
+        this.drawRear(queueHeight, queueWidth, p5);
+    }
+
+    drawShape(
+        xCord: number,
+        yCord: number,
+        queueItemHeight: number,
+        p5: p5Types
+    ) {
+        p5.stroke(255);
+        p5.line(xCord, yCord, p5.width - 50, yCord);
+        p5.line(xCord, yCord + queueItemHeight, p5.width - 50, yCord + 70);
+    }
+
+    drawQueueItems(xCord: number, yCord: number, p5: p5Types) {
+        xCord = xCord + xCord / 2;
+        yCord = yCord + 35;
+        this.values.forEach((value) => {
+            p5.fill(255);
+            p5.noStroke();
+            p5.textAlign(p5.CENTER);
+            p5.text(`Value➡️${value || 'null'}`, xCord, yCord);
+            p5.rectMode(p5.CENTER);
+            p5.stroke(255);
+            p5.noFill();
+            p5.rect(xCord, yCord, 75, 50);
+            xCord += 80;
+        });
+    }
+
+    drawStart(
+        xCord: number,
+        yCord: number,
+        stackWidth: number,
+        stackHeight: number,
+        p5: p5Types
+    ) {
+        p5.fill(255);
+        p5.noStroke();
+        p5.textAlign(p5.CENTER);
+        p5.text(`Start ⬇️`, xCord, (p5.height - stackHeight) / 2);
+    }
+
+    drawFront(xCord: number, queueHeight: number, p5: p5Types) {
+        p5.fill(255);
+        p5.noStroke();
+        p5.textAlign(p5.CENTER);
+        p5.text(`Front ⬇️`, xCord, (p5.height - queueHeight) / 2);
+    }
+
+    drawRear(queueHeight: number, queueWidth: number, p5: p5Types) {
+        p5.fill(255);
+        p5.noStroke();
+        p5.textAlign(p5.CENTER);
+        p5.text(`Rear ⬇️`, queueWidth, (p5.height - queueHeight) / 2);
     }
 }
