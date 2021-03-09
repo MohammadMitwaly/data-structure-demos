@@ -120,19 +120,6 @@ export default class CircularQueue<T> {
         });
     }
 
-    drawStart(
-        xCord: number,
-        yCord: number,
-        stackWidth: number,
-        stackHeight: number,
-        p5: p5Types
-    ) {
-        p5.fill(255);
-        p5.noStroke();
-        p5.textAlign(p5.CENTER);
-        p5.text(`Start ⬇️`, xCord, (p5.height - stackHeight) / 2);
-    }
-
     drawFront(xCord: number, queueHeight: number, p5: p5Types) {
         p5.fill(255);
         p5.noStroke();
