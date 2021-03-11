@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Data structures implementations in TypeScript, and visualization in P5.JS
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
