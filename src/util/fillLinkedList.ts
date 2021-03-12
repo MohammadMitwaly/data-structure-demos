@@ -13,7 +13,7 @@ export const createFillLinkedListNumbers = (
     return list;
 };
 
-export const createFillDoublyLinkedList = (
+export const createFillDoublyLinkedListNumbers = (
     amount: number,
     minNumber: number,
     maxNumber: number
