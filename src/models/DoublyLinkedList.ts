@@ -35,7 +35,6 @@ export default class DoublyLinkedList extends LinkedList {
     removeNodeByValue(value: number | string) {
         // Store head and set-up previous
         let curr = this.head;
-        let prev: Node<number | string> | undefined;
         // Value is the head, reset head of list
         if (curr?.value === value) {
             this.head = curr.next;
