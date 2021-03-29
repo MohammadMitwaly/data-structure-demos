@@ -8,6 +8,13 @@ export default class PerfectBinTree extends BinNode {
     Source: https://www.programiz.com/dsa/perfect-binary-tree
     */
 
+    /*
+    Perfect Binary Tree Theorems:
+        - A perfect binary tree of height h has 2h + 1 – 1 node.
+        - A perfect binary tree with n nodes has height log(n + 1) – 1 = Θ(ln(n)).
+        - A perfect binary tree of height h has 2h leaf nodes.
+        - The average depth of a node in a perfect binary tree is Θ(ln(n)).
+    */
     constructor(value: string | number, left?: BinNode, right?: BinNode) {
         super(value, left, right);
     }
