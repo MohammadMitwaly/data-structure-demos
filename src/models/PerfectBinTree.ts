@@ -1,4 +1,3 @@
-import { rootCertificates } from 'node:tls';
 import { BinNode } from './BinNode';
 
 export default class PerfectBinTree extends BinNode {
