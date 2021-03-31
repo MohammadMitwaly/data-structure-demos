@@ -39,7 +39,7 @@ export class BinNode {
     addNodeBST(node: BinNode) {
         if (node.value < this.value) {
             //@ts-ignore
-            if (!this.root?.root && node.value < this.root?.root.value) {
+            if (node.value < this.root?.root.value) {
                 node.isRightInner = false;
             }
             if (!this.left) {
@@ -56,7 +56,7 @@ export class BinNode {
             }
         } else if (node.value > this.value) {
             //@ts-ignore
-            if (!this.root?.root && node.value > this.root?.root.value) {
+            if (node.value > this.root?.root.value) {
                 node.isRightInner = true;
             }
             if (!this.right) {
